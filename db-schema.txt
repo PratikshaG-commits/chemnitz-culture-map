@@ -1,0 +1,26 @@
+# Database Schema - Chemnitz Cultural Map
+
+## Collection: users
+
+This collection stores user credentials and their favorite cultural locations.
+
+### Fields:
+- _id: ObjectId (MongoDB's unique identifier)
+- name: String (User's full name)
+- email: String (User's email address - must be unique)
+- password: String (Encrypted password using bcrypt or similar)
+- favorites: Array of GeoJSON objects representing favorite places
+
+Each item in the `favorites` array contains:
+  - type: "Feature" (GeoJSON format)
+  - geometry:
+      - type: "Point"
+      - coordinates: [longitude, latitude]
+  - properties:
+      - name: String (Name of the place)
+      - category: String (e.g., museum, restaurant, artwork, etc.)
+
+## Notes:
+- MongoDB automatically handles creation of the `users` collection when inserting a document.
+- GeoJSON format allows easy integration with Leaflet.js for mapping.
+- Favorites are stored per user.

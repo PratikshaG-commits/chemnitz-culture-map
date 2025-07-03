@@ -1,0 +1,277 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #212121; 
+  color: #eeeaea;
+} 
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+}
+.logo {
+  font-size: 0.7rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+.nav-links a {
+  color: #fff;
+  margin-left: 1.5rem;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.nav-links a:hover {
+  transform: translateY(-10px);
+  cursor: pointer;
+}
+
+.user-icon {
+  width: 5%;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+/* Hero */
+.hero {
+  height: 100vh;
+  background-image: url('images/Theaterplatz.jpg');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+.hero-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  padding: 2rem;
+  border-radius: 10px;
+  color: rgb(251, 247, 247);
+
+}
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+.btn {
+  background: rgb(214, 68, 14);
+  color: rgb(255, 251, 251);
+  padding: 0.8rem 1.5rem;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 50px;
+}
+
+.about-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  padding: 60px 20px;
+  color: #fff;
+  scroll-margin-top: 100px;
+}
+
+.about-container {
+  max-width: 1200px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.about-image img {
+  max-width: 400px;
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.about-text {
+  flex: 1;
+}
+
+.about-text h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  color: rgb(214, 68, 14);
+}
+
+.about-text p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #e0e0e0;
+  text-align: justify;
+  
+}
+
+.section-divider {
+  border: none;
+  height: 1px;
+  background-color: white;
+  margin: 40px auto;
+  width: 80%;
+  opacity: 0.3; 
+
+}
+
+/* Categories */
+.categories {
+  padding: 60px 0;
+  background: black;
+  text-align: center;
+  border-radius: 12px;
+} 
+.categories h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+.category-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+.category-card {
+  background: #1c1c1c;
+  border-radius: 18px;
+  min-height: 200px;
+  padding: 30px 20px;
+  width: 250px;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+  transition: transform 0.3s ease;
+  box-shadow: 0.3s ease;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  max-width: 300px;
+}
+
+.category-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 25px rgba(255, 255, 255, 0.1);
+}
+
+/* Individual Colors */
+.museum {
+  background-color: #CA6F1E;
+}
+
+.theater {
+  background-color: #7d3c98;
+}
+.restaurant{
+  background-color:#B2B377;
+}
+
+.category-card h3 {
+  margin-bottom: 0.5rem;
+}
+
+/* Footer */
+.footer {
+  background: #1c1c1c;
+  padding: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+.modal {
+  position: fixed;
+  z-index: 9999;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #222;
+  padding: 20px;
+  border-radius: 10px;
+  color: white;
+  width: 300px;
+}
+
+.close {
+  float: right;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.modal-content input {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.modal-btn {
+  padding: 10px;
+  background: rgb(214, 68, 14);
+  color: white;
+  border: none;
+  font-weight: bold;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.modal-btn:hover {
+  background-color: #c95410;
+}
+
+.close {
+  cursor: pointer;
+  font-size: 24px;
+  color: white;
+  float: right;
+}
+
+.close:hover {
+  color: #f00;
+}
+
+.modal-switch {
+  margin-top: 12px;
+  font-size: 14px;
+  text-align: center;
+  color: #f0f0f0;
+}
+
+.switch-link {
+  color: rgb(214, 68, 14);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.switch-link:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,107 @@
+
+openapi: 3.0.0
+info:
+  title: Chemnitz Cultural Map API
+  description: REST API for user authentication and favorite places
+  version: 1.0.0
+servers:
+  - url: http://localhost:5000
+
+paths:
+  /api/register:
+    post:
+      summary: Register a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '201':
+          description: User registered successfully
+
+  /api/login:
+    post:
+      summary: Login user and get JWT token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Login successful, returns JWT token
+
+  /api/auth/favorites:
+    get:
+      summary: Get list of user's favorite places
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: List of user's favorite places
+
+    post:
+      summary: Add place to favorites
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                site:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    coordinates:
+                      type: array
+                      items:
+                        type: number
+                      example: [12.921, 50.832]
+      responses:
+        '200':
+          description: Place added to favorites
+
+    delete:
+      summary: Remove place from favorites
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: query
+          name: lng
+          schema:
+            type: number
+          required: true
+        - in: query
+          name: lat
+          schema:
+            type: number
+          required: true
+      responses:
+        '200':
+          description: Place removed from favorites
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

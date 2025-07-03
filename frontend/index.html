@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chemnitz Cultural Heritage Map</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+
+</head>
+<body>
+  <!-- Navigation -->
+  <header class="navbar">
+    <div class="logo">Chemnitz Cultural Map</div>
+    <nav class="nav-links">
+      <a href="#" onclick="toggleModal('registerModal')">
+        <i class="fas fa-user-circle user-icon"></i> Register
+      </a>
+      <a href="#" onclick="toggleModal('loginModal')">Login</a>
+      <a href="#about">About</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-overlay">
+      <h1>Discover Chemnitz</h1>
+      <p>“Your Gateway to Chemnitz's Cultural Treasures.”</p>
+      <div class="hero-buttons">
+        <a href="#" id="startExploring" class="btn">Start Exploring</a>
+      </div>
+    </div>
+  </section>
+
+<!-- About Section -->
+<section id="about" class="about-section">
+  <div class="about-container">
+    <div class="about-image">
+      <img src="images/karl-marx.jpg" alt="Karl Marx Monument in Chemnitz">
+    </div>
+    <div class="about-text">
+      <h1>Welcome to Chemnitz</h1>
+      <p>
+        Chemnitz is more than a city—it’s a journey through time. This platform is your gateway to uncovering the cultural richness of Chemnitz: from historic museums to vibrant theatres and cozy local cuisine spots.
+        Dive in and discover the spirit of a city that tells its story through every street, monument, and melody.
+      </p>
+    </div>
+  </div>
+</section>
+
+ 
+
+  <!-- Categories -->
+  <section id="categories" class="categories">
+    <h2>What Would You Like to Discover Today?</h2>
+    <hr class="section-divider">
+    <div class="category-grid">
+      <div class="category-card museum">
+        <h3>Museums</h3>
+        <p>Unlock stories from Chemnitz’s past</p>
+      </div>
+      <div class="category-card theater">
+        <h3>Theatres</h3>
+        <p>Experience the pulse of live performance</p>
+      </div>
+      <div class="category-card restaurant">
+        <h3>Restaurant</h3>
+        <p>Savor flavors that tell a story</p>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Login Modal -->
+  <div id="loginModal" class="modal" style="display:none;">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('loginModal')">&times;</span>
+    <h2>Login</h2>
+    <form id="loginForm">
+      <input type="email" placeholder="Email" id="loginEmail" name="email" required>
+      <input type="password" placeholder="Password" id="loginPassword" name="password" required>
+      <button type="submit" class="modal-btn">Login</button>
+      <p>Don't have an account? 
+        <a href="#" class="switch-link" onclick="toggleModal('registerModal'); closeModal('loginModal')">Register</a>
+      </p>
+    </form>
+  </div>
+</div>
+
+
+  <!-- Register Modal -->
+  <div id="registerModal" class="modal" style="display:none;">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('registerModal')">&times;</span>
+    <h2>Register</h2>
+    <form id="registerForm">
+      <input type="text" placeholder="Name" id="registerName" name="name" required>
+      <input type="email" placeholder="Email" id="registerEmail" name="email" required>
+      <input type="password" placeholder="Password" id="registerPassword" name="password" required>
+      <button type="submit" class="modal-btn">Register</button>
+    </form>
+  </div>
+</div>
+
+
+  
+  <!-- Footer -->
+  <footer class="footer" id="contact">
+    <p>&copy; 2025 Chemnitz Cultural Map | Contact: info@chemnitzmap.de</p>
+  </footer>
+
+  <script>
+    // Toggle modal visibility by ID
+    function toggleModal(id) {
+      const modal = document.getElementById(id);
+      if (modal) {
+        modal.style.display = (modal.style.display === "flex") ? "none" : "flex";
+      }
+    }
+    
+    function closeModal(id) {
+      const modal = document.getElementById(id);
+      if (modal) modal.style.display = "none";
+    }
+
+  document.addEventListener("DOMContentLoaded", function () {
+
+    // Hook modal open buttons (optional if you have dedicated buttons)
+    const loginBtn = document.getElementById("openLoginModal");
+    const registerBtn = document.getElementById("openRegisterModal");
+
+    if (loginBtn) loginBtn.addEventListener("click", () => toggleModal("loginModal"));
+    if (registerBtn) registerBtn.addEventListener("click", () => toggleModal("registerModal"));
+
+    // Login form submission
+    const loginForm = document.getElementById("loginForm");
+    if (loginForm) {
+      loginForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const data = {
+          email: form.email.value,
+          password: form.password.value
+        };
+
+        try {
+          const res = await fetch("http://localhost:5000/api/auth/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+          });
+          const result = await res.json();
+          alert(result.message || "Logged in!");
+          if (res.ok) {
+            localStorage.setItem("token", result.token);
+            window.location.href = "map.html";  // redirect after login
+          }
+        } catch (err) {
+          alert("Login failed");
+          console.error(err);
+        }
+      });
+    }
+
+    // Register form submission
+    const registerForm = document.getElementById("registerForm");
+    if (registerForm) {
+      registerForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const data = {
+          name: form.name.value,
+          email: form.email.value,
+          password: form.password.value
+        };
+
+        try {
+          const res = await fetch("http://localhost:5000/api/auth/register", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+          });
+          const result = await res.json();
+          alert(result.message || "Registration complete!");
+          if (res.ok) toggleModal("registerModal");
+        } catch (err) {
+          alert("Registration failed");
+          console.error(err);
+        }
+      });
+    }
+
+    // Optional: Close modals on outside click
+    window.addEventListener("click", function (e) {
+      document.querySelectorAll(".modal").forEach(modal => {
+        if (e.target === modal) modal.style.display = "none";
+      });
+    });
+
+  });
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const startBtn = document.getElementById("startExploring");
+      if (startBtn) {
+        startBtn.addEventListener("click", function (e) {
+          e.preventDefault(); // Stop the default link behavior
+          const token = localStorage.getItem("token");
+          if (token) {
+            window.location.href = "map.html";
+          } else {
+            toggleModal("loginModal");
+         }
+        });
+      }
+  });
+
+</script>
+</body>
+</html>
